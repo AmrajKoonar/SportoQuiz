@@ -1,103 +1,188 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            TESTING CHANGES FOR DEPLOYMENT
-          </li>
-        </ol>
+  const [hoveredLeague, setHoveredLeague] = useState<string | null>(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            TESTING CHANGES FOR DEPLOYMENT
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            TESTING CHANGES FOR DEPLOYMENT
-          </a>
+  const leagues = [
+    {
+      id: 'nfl',
+      name: 'NFL',
+      emoji: '🏈',
+      description: '32 teams, founded 1920',
+      background: '/images/nfl-bg.jpg',
+    },
+    {
+      id: 'nba',
+      name: 'NBA',
+      emoji: '🏀',
+      description: '30 teams, founded 1946',
+      background: '/images/nba-bg.jpg',
+    },
+    {
+      id: 'mlb',
+      name: 'MLB',
+      emoji: '⚾',
+      description: '30 teams, founded 1903',
+      background: '/images/mlb-bg.jpg',
+    },
+    {
+      id: 'epl',
+      name: 'EPL',
+      emoji: '⚽',
+      description: '20 teams, founded 1992',
+      background: '/images/epl-bg.jpg',
+    },
+  ];
+
+  return (
+    <div className="min-h-screen">
+      <section className="relative h-screen flex items-center justify-center">
+        <div className="absolute inset-0 z-0 bg-gradient-to-b from-blue-900 to-indigo-900 overflow-hidden">
+          <div className="absolute inset-0 opacity-20 bg-[url('/images/stadium-bg.jpg')] bg-cover bg-center" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          TESTING CHANGES FOR DEPLOYMENT
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          TESTING CHANGES FOR DEPLOYMENT
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          TESTING CHANGES FOR DEPLOYMENT
-        </a>
-      </footer>
+        
+        <div className="z-10 text-center px-4 md:px-8 max-w-5xl">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Test Your Sports Knowledge! 🏆
+          </motion.h1>
+          
+          <motion.p 
+            className="text-xl md:text-2xl text-gray-100 mb-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+          >
+            Pick your favorite league and start a trivia challenge on NFL, NBA, MLB, or EPL.
+          </motion.p>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            <a 
+              href="#league-selection"
+              className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300 inline-block"
+            >
+              Start Quiz
+            </a>
+          </motion.div>
+        </div>
+      </section>
+
+      <section id="league-selection" className="py-24 px-4 md:px-8 bg-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">Choose Your League</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {leagues.map((league) => (
+              <Link href={`/quiz/${league.id}`} key={league.id}>
+                <motion.div
+                  className="relative h-72 rounded-xl overflow-hidden cursor-pointer"
+                  onMouseEnter={() => setHoveredLeague(league.id)}
+                  onMouseLeave={() => setHoveredLeague(null)}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black opacity-70" />
+                  
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${league.background})` }}
+                  />
+                  
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-6">
+                    <span className="text-5xl mb-4">{league.emoji}</span>
+                    <h3 className="text-2xl font-bold mb-2">{league.name}</h3>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ 
+                        opacity: hoveredLeague === league.id ? 1 : 0,
+                        height: hoveredLeague === league.id ? 'auto' : 0
+                      }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="text-gray-200 text-center">{league.description}</p>
+                    </motion.div>
+                  </div>
+                  
+                  <motion.div
+                    className="absolute inset-0 border-2 rounded-xl"
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: hoveredLeague === league.id ? 1 : 0,
+                      borderColor: 
+                        league.id === 'nfl' ? '#013369' :
+                        league.id === 'nba' ? '#C9082A' :
+                        league.id === 'mlb' ? '#041E42' :
+                        '#3D195B'
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 px-4 md:px-8 bg-gray-800">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-8">
+            🔥 Top Scorers This Week
+          </h2>
+          
+          <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-gray-700">
+                  <th className="py-3 text-left text-gray-400">Rank</th>
+                  <th className="py-3 text-left text-gray-400">Player</th>
+                  <th className="py-3 text-left text-gray-400">League</th>
+                  <th className="py-3 text-right text-gray-400">Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { rank: 1, name: "SportsGuru92", league: "NFL", score: 985 },
+                  { rank: 2, name: "HoopDreams", league: "NBA", score: 940 },
+                  { rank: 3, name: "BaseballFan44", league: "MLB", score: 915 },
+                  { rank: 4, name: "FootballLegend", league: "EPL", score: 890 },
+                  { rank: 5, name: "MVPHunter", league: "NBA", score: 865 }
+                ].map((player) => (
+                  <tr key={player.rank} className="border-b border-gray-800 hover:bg-gray-800 transition duration-150">
+                    <td className="py-4 text-gray-300">{player.rank}</td>
+                    <td className="py-4 font-medium text-white">{player.name}</td>
+                    <td className="py-4 text-gray-300">{player.league}</td>
+                    <td className="py-4 text-right text-green-400 font-semibold">{player.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            
+            <div className="mt-6 text-center">
+              <Link 
+                href="/leaderboard" 
+                className="text-blue-400 hover:text-blue-300 font-medium transition duration-150"
+              >
+                View Full Leaderboard →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
