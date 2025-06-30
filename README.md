@@ -10,7 +10,7 @@ An interactive sports trivia web app that generates AI-powered questions based o
 - 🏆 **Real-Time Leaderboard**: Compete with others and track your ranking live.
 - 🏈 **Multi-League Support**: Choose from 4 leagues — **NFL**, **NBA**, **MLB**, and **EPL**.
 - 🎯 **3 Difficulty Modes**: Select from Rookie, Pro, and Hall of Fame.
-- 📇 **Contact Page**: Send feedback or suggestions through a built-in contact form.
+- 📇 **Contact Page**: Submit feedback or suggestions using the built-in contact form.
 - ⚡ **Fast & Responsive UI**: Built with Tailwind CSS for smooth performance and styling.
 - 🔁 **CI/CD Integration**: Auto-deploys using GitHub and Vercel for seamless updates.
 
