@@ -25,14 +25,20 @@ interface QuizSettings {
 
 export default function SportsQuizPage() {
   const searchParams = useSearchParams();
-  const selectedLeague = searchParams.get("league");
+  const [preselectedLeague, setPreselectedLeague] = useState<string | null>(null);
 
   useEffect(() => {
-  // only auto-set if it's a built-in league and user hasn't manually picked something
-  if (selectedLeague && ["NFL", "NBA", "MLB", "NHL", "EPL"].includes(selectedLeague) && !sport) {
-    setSport(selectedLeague);
-  }
-}, [selectedLeague]);
+    const league = searchParams.get("league");
+    if (league && ["NFL", "NBA", "MLB", "NHL", "EPL"].includes(league)) {
+      setPreselectedLeague(league);
+    }
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (preselectedLeague && !sport) {
+      setSport(preselectedLeague);
+    }
+  }, [preselectedLeague]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
