@@ -8,6 +8,7 @@ env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  API_KEY: ${{ secrets.API_KEY }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
