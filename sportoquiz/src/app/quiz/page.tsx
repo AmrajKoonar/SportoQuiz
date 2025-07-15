@@ -1,11 +1,8 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 
 interface Question {
   id: number;
@@ -26,21 +23,25 @@ interface QuizSettings {
 }
 
 export default function SportsQuizPage() {
-  const searchParams = useSearchParams();
+
   const [preselectedLeague, setPreselectedLeague] = useState<string | null>(null);
 
   useEffect(() => {
-    const league = searchParams.get("league");
-    if (league && ["NFL", "NBA", "MLB", "NHL", "EPL"].includes(league)) {
-      setPreselectedLeague(league);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const league = params.get("league");
+      if (league && ["NFL", "NBA", "MLB", "NHL", "EPL"].includes(league)) {
+        setPreselectedLeague(league);
+      }
     }
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
-    if (preselectedLeague && !sport) {
-      setSport(preselectedLeague);
-    }
+  if (preselectedLeague && !sport) {
+    setSport(preselectedLeague);
+  }
   }, [preselectedLeague]);
+
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
