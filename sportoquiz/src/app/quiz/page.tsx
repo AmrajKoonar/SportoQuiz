@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 interface Question {
   id: number;
@@ -23,6 +24,16 @@ interface QuizSettings {
 }
 
 export default function SportsQuizPage() {
+  const searchParams = useSearchParams();
+  const selectedLeague = searchParams.get("league");
+
+  useEffect(() => {
+  // only auto-set if it's a built-in league and user hasn't manually picked something
+  if (selectedLeague && ["NFL", "NBA", "MLB", "NHL", "EPL"].includes(selectedLeague) && !sport) {
+    setSport(selectedLeague);
+  }
+}, [selectedLeague]);
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);

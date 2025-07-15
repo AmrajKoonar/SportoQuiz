@@ -86,7 +86,7 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {leagues.map((league) => (
-              <Link href={`/quiz/${league.id}`} key={league.id}>
+              <Link href={{ pathname: "/quiz", query: { league: league.name } }} key={league.id}>
                 <motion.div
                   className="relative h-72 rounded-xl overflow-hidden cursor-pointer"
                   onMouseEnter={() => setHoveredLeague(league.id)}
