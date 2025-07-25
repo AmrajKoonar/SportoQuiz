@@ -4,17 +4,19 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+
 env:
   VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  API_KEY: ${{ secrets.API_KEY }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -31,13 +33,16 @@ jobs:
           cd sportoquiz
           npm run build
 
-      - name: Install Vercel CLI
-        run: npm install -g vercel
-
       - name: Deploy to Vercel
         id: deploy
         run: |
-          DEPLOYMENT_URL=$(vercel deploy --prod --token="${{ secrets.VERCEL_TOKEN }}" --yes)
+          cd sportoquiz
+          DEPLOYMENT_URL=$(
+            npx vercel@latest deploy \
+              --prod \
+              --token="${{ secrets.VERCEL_TOKEN }}" \
+              --yes
+          )
           echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
           echo "✅ Production deployment completed successfully!"
           echo "🔗 Deployed to: $DEPLOYMENT_URL"

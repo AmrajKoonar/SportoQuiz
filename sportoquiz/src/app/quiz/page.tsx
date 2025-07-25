@@ -445,12 +445,12 @@ export default function SportsQuizPage() {
                 >
                   View Leaderboard
                 </Link>
-                <Link
-                  href="/quiz"
+                <button
+                  onClick={restartQuiz}
                   className="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white font-medium rounded-lg transition"
                 >
                   Try Another Quiz
-                </Link>
+                </button>
               </div>
             </div>
           </motion.div>
