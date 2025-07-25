@@ -6,11 +6,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-env:
-  VERCEL_TOKEN:       ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_PROJECT_ID:  ${{ secrets.VERCEL_PROJECT_ID }}
-  VERCEL_ORG_ID:      ${{ secrets.VERCEL_ORG_ID }}
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,22 +19,17 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
+      - name: Install & Build
         run: |
           cd sportoquiz
           npm ci
-
-      - name: Build
-        run: |
-          cd sportoquiz
           npm run build
 
-      - name: Deploy via npx vercel
-        run: |
-          cd sportoquiz
-          npx vercel@latest deploy \
-            --prod \
-            --token="$VERCEL_TOKEN" \
-            --scope="$VERCEL_ORG_ID" \
-            --project="$VERCEL_PROJECT_ID" \
-            --yes
+      - name: Vercel Deployment
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token:    ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id:   ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: sportoquiz
+          vercel-args:     --prod
