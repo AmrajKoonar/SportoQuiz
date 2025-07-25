@@ -1,14 +1,15 @@
+# .github/workflows/deploy.yml
 name: Deploy to Vercel
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   workflow_dispatch:
 
 env:
-  VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_TOKEN:       ${{ secrets.VERCEL_TOKEN }}
+  VERCEL_PROJECT_ID:  ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_ORG_ID:      ${{ secrets.VERCEL_ORG_ID }}
 
 jobs:
   deploy:
@@ -21,7 +22,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Install dependencies
         run: |
@@ -33,16 +34,12 @@ jobs:
           cd sportoquiz
           npm run build
 
-      - name: Deploy to Vercel
-        id: deploy
+      - name: Deploy via npx vercel
         run: |
           cd sportoquiz
-          DEPLOYMENT_URL=$(
-            npx vercel@latest deploy \
-              --prod \
-              --token="${{ secrets.VERCEL_TOKEN }}" \
-              --yes
-          )
-          echo "deployment_url=$DEPLOYMENT_URL" >> $GITHUB_OUTPUT
-          echo "✅ Production deployment completed successfully!"
-          echo "🔗 Deployed to: $DEPLOYMENT_URL"
+          npx vercel@latest deploy \
+            --prod \
+            --token="$VERCEL_TOKEN" \
+            --scope="$VERCEL_ORG_ID" \
+            --project="$VERCEL_PROJECT_ID" \
+            --yes
