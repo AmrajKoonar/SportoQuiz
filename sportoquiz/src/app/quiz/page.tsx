@@ -247,46 +247,52 @@ export default function SportsQuizPage() {
     <div className="pt-16 min-h-screen bg-gradient-to-b from-blue-900 to-black">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        {/* 🔹 INSERT NEW SECTION HERE */}
-        <div className="text-center mb-16">
-          <motion.h1 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Choose Your Quiz Challenge
-          </motion.h1>
-          <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-          >
-            Select a sports league below to begin your trivia challenge. Each quiz features questions about teams, players, history, and memorable moments.
-          </motion.p>
-        </div>
+      {/* only show this on the “start quiz” page */}
+        {showStartModal && (
+          <>
+            {/* 🔹 INSERT NEW SECTION HERE */}
+            <div className="text-center mb-16">
+              <motion.h1 
+                className="text-4xl md:text-5xl font-bold text-white mb-6"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Choose Your Quiz Challenge
+              </motion.h1>
+              <motion.p 
+                className="text-xl text-gray-300 max-w-3xl mx-auto"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                Select a sports league below to begin your trivia challenge. Each quiz features questions about teams, players, history, and memorable moments.
+              </motion.p>
+            </div>
 
-        <div className="bg-gray-800 rounded-xl p-8 shadow-lg mb-12">
-          <h2 className="text-2xl font-bold text-white mb-4">How to Play</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">1</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Choose a League</h3>
-              <p className="text-gray-300">Select from NFL, NBA, MLB, or EPL quizzes based on your favorite sport.</p>
+            <div className="bg-gray-800 rounded-xl p-8 shadow-lg mb-12">
+              <h2 className="text-2xl font-bold text-white mb-4">How to Play</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">1</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Choose a League</h3>
+                  <p className="text-gray-300">Select from NFL, NBA, MLB, or EPL quizzes based on your favorite sport.</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">2</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Select Difficulty</h3>
+                  <p className="text-gray-300">Pick your challenge level from beginner to expert based on your knowledge.</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">3</div>
+                  <h3 className="text-xl font-semibold text-white mb-2">Beat the Clock</h3>
+                  <p className="text-gray-300">Answer questions correctly and quickly to earn a spot on the leaderboard.</p>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">2</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Select Difficulty</h3>
-              <p className="text-gray-300">Pick your challenge level from beginner to expert based on your knowledge.</p>
-            </div>
-            <div className="flex flex-col items-center text-center">
-              <div className="w-16 h-16 flex items-center justify-center rounded-full bg-blue-600 text-white text-2xl mb-4">3</div>
-              <h3 className="text-xl font-semibold text-white mb-2">Beat the Clock</h3>
-              <p className="text-gray-300">Answer questions correctly and quickly to earn a spot on the leaderboard.</p>
-            </div>
-          </div>
-        </div>
+            {/* 🔹 INSERT NEW SECTION HERE */}
+          </>
+        )}
 
         {showStartModal ? (
           <motion.div 
