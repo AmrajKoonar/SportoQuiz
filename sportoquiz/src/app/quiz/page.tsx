@@ -66,6 +66,7 @@ export default function SportsQuizPage() {
     { value: "NBA", label: "NBA (Basketball)" },
     { value: "NHL", label: "NHL (Hockey)" },
     { value: "MLB", label: "MLB (Baseball)" },
+    { value: "EPL", label: "EPL (European Soccer)" },
     { value: "Other", label: "Other (Custom Sport)" }
   ];
 
@@ -344,7 +345,7 @@ export default function SportsQuizPage() {
                     value={customSport}
                     onChange={(e) => setCustomSport(e.target.value)}
                     className="w-full p-3 bg-gray-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Enter custom sport (e.g., Soccer, Tennis, etc.)"
+                    placeholder="Enter custom sport (e.g., Rugby, Tennis, etc.)"
                   />
                 </div>
               )}
