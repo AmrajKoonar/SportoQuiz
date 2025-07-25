@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
     });
 
     // Check if the sport is valid
-    const knownSports = ["NFL", "NBA", "NHL", "MLB"];
+    const knownSports = ["NFL", "NBA", "NHL", "MLB", "EPL"];
 
     if (!knownSports.includes(sport)) {
       const isValid = await isValidSport(sport, client);
