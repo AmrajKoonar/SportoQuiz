@@ -10,6 +10,7 @@ export default function Leaderboard() {
     { id: 'all', name: 'All Leagues' },
     { id: 'nfl', name: 'NFL', emoji: '🏈' },
     { id: 'nba', name: 'NBA', emoji: '🏀' },
+    { id: 'nhl', name: 'NHL', emoji: '🏒' },
     { id: 'mlb', name: 'MLB', emoji: '⚾' },
     { id: 'epl', name: 'EPL', emoji: '⚽' },
   ];
@@ -40,6 +41,13 @@ export default function Leaderboard() {
       { rank: 3, name: "SlamDunk23", league: "NBA", score: 820, avatar: "/images/avatars/avatar8.jpg" },
       { rank: 4, name: "ThreePointKing", league: "NBA", score: 775, avatar: "/images/avatars/avatar14.jpg" },
       { rank: 5, name: "CourtVision", league: "NBA", score: 750, avatar: "/images/avatars/avatar15.jpg" }
+    ],
+    nhl: [
+      { rank: 1, name: "BaseballFan44", league: "NHL", score: 915, avatar: "/images/avatars/avatar3.jpg" },
+      { rank: 2, name: "PitchPerfect", league: "NHL", score: 805, avatar: "/images/avatars/avatar9.jpg" },
+      { rank: 3, name: "HomeRunHero", league: "NHL", score: 770, avatar: "/images/avatars/avatar16.jpg" },
+      { rank: 4, name: "DiamondKing", league: "NHL", score: 745, avatar: "/images/avatars/avatar17.jpg" },
+      { rank: 5, name: "BullpenMaster", league: "NHL", score: 720, avatar: "/images/avatars/avatar18.jpg" }
     ],
     mlb: [
       { rank: 1, name: "BaseballFan44", league: "MLB", score: 915, avatar: "/images/avatars/avatar3.jpg" },
