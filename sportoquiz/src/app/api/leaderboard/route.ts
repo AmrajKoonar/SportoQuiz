@@ -1,21 +1,37 @@
+// This makes the API run in plain Node (not Edge)
+export const runtime = 'nodejs';
+
+
 // src/app/api/leaderboard/route.ts
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 
 // POST /api/leaderboard → record a new score
 export async function POST(request: Request) {
-  const { username, league, difficulty, score, totalQuestions } = await request.json();
-  const { error } = await supabaseAdmin
-    .from('leaderboard')
-    .insert({
-      username,
-      league,
-      difficulty,
-      score,
-      total_questions: totalQuestions,
+    const body = await request.json();
+    console.log('📝 POST /api/leaderboard body:', body);
+
+    // pull "sport" from the payload and write it into the "league" column
+    const { username, sport, difficulty, score, totalQuestions } = body;
+    const { data, error } = await supabaseAdmin
+        .from('leaderboard')
+        .insert({
+        username,
+        league: sport,        // ← use sport here
+        difficulty,
+        score,
+        total_questions: totalQuestions,
     });
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-  return NextResponse.json({ success: true });
+
+    if (error) {
+    // 2) log the Supabase error object
+    console.error('❌ Supabase insert error:', error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // 3) confirm success
+    console.log('✅ Supabase insert succeeded:', data);
+    return NextResponse.json({ success: true });
 }
 
 // GET  /api/leaderboard → fetch top 50 all‑time scores
