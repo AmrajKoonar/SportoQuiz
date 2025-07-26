@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.52.1",
     "@tailwindcss/cli": "^4.1.6",
     "framer-motion": "^12.11.0",
     "next": "15.3.2",

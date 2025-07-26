@@ -143,7 +143,11 @@ export default function SportsQuizPage() {
     
     // TODO: Send to backend to save the result
     console.log("Quiz result:", quizResult);
-    localStorage.setItem('lastQuizResult', JSON.stringify(quizResult));
+    await fetch('/api/leaderboard', {
+      method:   'POST',
+      headers:  { 'Content-Type': 'application/json' },
+      body:     JSON.stringify(quizResult)
+    });
   };
 
   const fetchQuizData = async (settings: QuizSettings): Promise<boolean> => {
