@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">
-            <h2 className="text-xl font-bold text-white mb-4">Sports<span className="text-blue-400">Trivia</span></h2>
+            <h2 className="text-xl font-bold text-white mb-4">Sporto<span className="text-blue-400">Quiz</span></h2>
             <p className="text-gray-400 mb-4">
               Test your knowledge with our challenging sports quizzes across NFL, NBA, MLB, and EPL leagues.
             </p>
@@ -97,7 +97,7 @@ export default function Footer() {
         
         <div className="mt-8 pt-8 border-t border-gray-700">
           <p className="text-gray-400 text-sm text-center">
-            &copy; {new Date().getFullYear()} Sports Trivia Challenge. All rights reserved.
+            &copy; {new Date().getFullYear()} SportoQuiz. All rights reserved.
           </p>
           <p className="text-gray-500 text-xs text-center mt-2">
             Powered by <a href="https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground" className="hover:text-gray-400 transition duration-150">OpenAI GPT-4o mini</a>
