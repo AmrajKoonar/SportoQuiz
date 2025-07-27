@@ -160,13 +160,29 @@ export default function SportsQuizPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          sport: finalSport,
-          difficulty: settings.difficulty,
-          username: settings.username
+        sport:      finalSport,
+        difficulty: settings.difficulty,
+        username:   settings.username,
+        // pull in the same previousQuizzes you just wrote above:
+        previousQuizzes: JSON.parse(localStorage.getItem('previousQuizzes') || '[]')
         }),
       });
 
       const data = await response.json();
+      
+      if (typeof window !== 'undefined') {
+        // 1. load or default
+        const stored = localStorage.getItem('previousQuizzes');
+        const previousQuizzes: QuizData[] = stored ? JSON.parse(stored) : [];
+
+        // 2. append the new quiz
+        previousQuizzes.push(data);
+
+        // 3. persist
+        localStorage.setItem('previousQuizzes', JSON.stringify(previousQuizzes));
+      }
+
+      setQuizData(data);
 
       if (data.errorCode === 1) {
         alert(`"${finalSport}" is not a recognized sport. Please enter a valid sport.`);

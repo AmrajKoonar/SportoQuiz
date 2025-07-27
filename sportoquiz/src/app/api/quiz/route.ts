@@ -8,10 +8,26 @@ const api_key = process.env.API_KEY;
 const endpoint = "https://models.inference.ai.azure.com";
 const modelName = "gpt-4o-mini";
 
+
+
+interface Question {
+  id: number;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+}
+
+interface QuizData {
+  questions: Question[];
+}
+
+
 interface QuizRequest {
   sport: string;
   difficulty: "Rookie" | "Pro" | "Hall of Fame";
   username: string;
+  previousQuizzes: QuizData[];
 }
 
 // ADD THIS FUNCTION ABOVE THE main POST()
@@ -39,7 +55,7 @@ async function isValidSport(sport: string, client: OpenAI): Promise<boolean> {
 
 export async function POST(request: NextRequest) {
   try {
-    const { sport, difficulty, username }: QuizRequest = await request.json();
+    const { sport, difficulty, username, previousQuizzes  }: QuizRequest = await request.json();
 
     if (!sport || !difficulty || !username) {
       return NextResponse.json(
@@ -82,12 +98,24 @@ export async function POST(request: NextRequest) {
 
     const difficultyDescription = getDifficultyDescription(difficulty);
 
+
+    // ─── 4. Extract just the question texts for deduplication ────────────────
+    const priorQuestions = previousQuizzes
+    .flatMap(qd => qd.questions.map(q => q.question));
+
     const response = await client.chat.completions.create({
       messages: [
         {
           role: "system",
           content:
             "Respond only with valid JSON. Do NOT include markdown formatting (```json) or any extra text. Only return a JSON object. Ensure all line breaks in the JSON string values are escaped with \\n so that the response is valid JSON.",
+        },
+        {
+          role: "system",
+          content:
+          // embed the prior questions so the model can avoid them
+          `The user has already seen these questions:\n${JSON.stringify(priorQuestions)}\n\n` +
+          `When you generate new questions, do NOT repeat or closely paraphrase any of the above.`
         },
         {
           role: "user",
@@ -117,7 +145,7 @@ export async function POST(request: NextRequest) {
         },
       ],
       model: modelName,
-      temperature: 0.8,
+      temperature: 0.1,
       max_tokens: 2000,
       top_p: 1,
     });
