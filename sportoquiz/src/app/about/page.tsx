@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -16,22 +17,10 @@ export default function About() {
   
   const teamMembers = [
     {
-      name: 'Alex Johnson',
+      name: 'Amraj Koonar',
       role: 'Founder & Lead Developer',
-      bio: 'Sports enthusiast with 10+ years of experience in web development and a passion for creating interactive sports experiences.',
-      avatar: '/images/team/alex.jpg'
-    },
-    {
-      name: 'Sarah Thompson',
-      role: 'Sports Data Specialist',
-      bio: 'Former sports analyst with deep knowledge across multiple leagues. Ensures our quizzes are accurate and challenging.',
-      avatar: '/images/team/sarah.jpg'
-    },
-    {
-      name: 'Michael Rodriguez',
-      role: 'UX/UI Designer',
-      bio: 'Creates the seamless and engaging visual experience that makes our trivia challenges so addictive.',
-      avatar: '/images/team/michael.jpg'
+      bio: 'Sports enthusiast with 2+ years of experience in web development and a passion for creating interactive sports experiences.',
+      avatar: '/images/team/amraj_pfp.JPG'
     }
   ];
   
@@ -153,11 +142,15 @@ export default function About() {
                     transition={{ delay: index * 0.1, duration: 0.5 }}
                     className="bg-gray-800 rounded-xl overflow-hidden shadow-lg"
                   >
-                    <div className="h-48 bg-gradient-to-r from-blue-600 to-indigo-600 flex items-center justify-center">
-                      <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center text-gray-800 text-2xl font-bold">
-                        {member.name.split(' ').map(n => n[0]).join('')}
-                      </div>
-                    </div>
+                   <div className="h-48 flex items-center justify-center bg-gray-900">
+                     <Image
+                       src={member.avatar}
+                       alt={member.name}
+                       width={96}
+                       height={96}
+                       className="rounded-full border-4 border-white"
+                     />
+                   </div>
                     <div className="p-6">
                       <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
                       <p className="text-blue-400 mb-4">{member.role}</p>
