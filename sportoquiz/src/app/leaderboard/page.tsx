@@ -23,6 +23,7 @@ export default function LeaderboardPage() {
     { id: 'NHL', name: 'NHL', emoji: '🏒' },
     { id: 'MLB', name: 'MLB', emoji: '⚾' },
     { id: 'EPL', name: 'EPL', emoji: '⚽' },
+    { id: 'other',       name: 'Other Sports', emoji: '🏓' },
   ];
 
   const timeframes = [
@@ -36,14 +37,26 @@ export default function LeaderboardPage() {
   useEffect(() => {
     // build query params from your two state vars
     const params = new URLSearchParams();
-    if (activeLeague    !== 'all')     params.set('league',    activeLeague);
-    if (activeTimeframe !== 'alltime') params.set('timeframe', activeTimeframe);
+    if (activeLeague !== 'all' && activeLeague !== 'other') {
+      params.set('league', activeLeague);
+    }
+    if (activeTimeframe !== 'alltime') {
+      params.set('timeframe', activeTimeframe);
+    }
 
     // fetch with ?league=...&timeframe=...
-    fetch(`/api/leaderboard?${params.toString()}`)
-      .then(res => res.json())
-      .then(setEntries)
-      .catch(console.error);
+  fetch(`/api/leaderboard?${params.toString()}`)
+    .then(res => res.json())
+    .then((allEntries: Entry[]) => {
+      if (activeLeague === 'other') {
+        // filter out the 5 main leagues, leaving only custom ones
+        const main = ['NFL','NBA','NHL','MLB','EPL'];
+        return allEntries.filter(e => !main.includes(e.league));
+      }
+      return allEntries;
+    })
+    .then(setEntries)
+    .catch(console.error);
   }, [activeLeague, activeTimeframe]);
 
   return (

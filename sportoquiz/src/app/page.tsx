@@ -1,12 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function Home() {
   const [hoveredLeague, setHoveredLeague] = useState<string | null>(null);
+
+
+  // ─── New: top‑week leaderboard state ─────────────
+  const [topWeek, setTopWeek] = useState<{
+    username: string;
+    league:   string;
+    score:    number;
+    created_at: string;
+  }[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/leaderboard?timeframe=week')
+    .then(res => res.json())
+    .then((data) => setTopWeek(data))
+    .catch(console.error)
+    .finally(() => setLoading(false));
+  }, []);
+  // ─────────────────────────────────────────────────
 
   const leagues = [
     {
@@ -24,10 +43,10 @@ export default function Home() {
       background: '/images/nba-bg.jpg',
     },
     {
-      id: 'mlb',
-      name: 'MLB',
-      emoji: '⚾',
-      description: '30 teams, founded 1903',
+      id: 'nhl',
+      name: 'NHL',
+      emoji: '🏒',
+      description: '32 teams, founded 1917',
       background: '/images/mlb-bg.jpg',
     },
     {
@@ -146,29 +165,35 @@ export default function Home() {
           
           <div className="bg-gray-900 rounded-xl p-6 shadow-lg">
             <table className="w-full">
-              <thead>
-                <tr className="border-b border-gray-700">
-                  <th className="py-3 text-left text-gray-400">Rank</th>
-                  <th className="py-3 text-left text-gray-400">Player</th>
-                  <th className="py-3 text-left text-gray-400">League</th>
-                  <th className="py-3 text-right text-gray-400">Score</th>
-                </tr>
-              </thead>
+              {/* … table head … */}
               <tbody>
-                {[
-                  { rank: 1, name: "SportsGuru92", league: "NFL", score: 985 },
-                  { rank: 2, name: "HoopDreams", league: "NBA", score: 940 },
-                  { rank: 3, name: "BaseballFan44", league: "MLB", score: 915 },
-                  { rank: 4, name: "FootballLegend", league: "EPL", score: 890 },
-                  { rank: 5, name: "MVPHunter", league: "NBA", score: 865 }
-                ].map((player) => (
-                  <tr key={player.rank} className="border-b border-gray-800 hover:bg-gray-800 transition duration-150">
-                    <td className="py-4 text-gray-300">{player.rank}</td>
-                    <td className="py-4 font-medium text-white">{player.name}</td>
-                    <td className="py-4 text-gray-300">{player.league}</td>
-                    <td className="py-4 text-right text-green-400 font-semibold">{player.score}</td>
+                {loading ? (
+                  <tr>
+                    <td colSpan={4} className="py-4 text-center text-gray-500">
+                      Loading…
+                    </td>
                   </tr>
-                ))}
+                ) : topWeek.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="py-4 text-center text-gray-500">
+                      No scores yet.
+                    </td>
+                  </tr>
+                ) : (
+                  topWeek.slice(0, 7).map((p, i) => (
+                    <tr
+                      key={i}
+                      className="border-b border-gray-800 hover:bg-gray-800 transition duration-150"
+                    >
+                      <td className="py-4 text-gray-300">{i + 1}</td>
+                      <td className="py-4 font-medium text-white">{p.username}</td>
+                      <td className="py-4 text-gray-300">{p.league}</td>
+                      <td className="py-4 text-right text-green-400 font-semibold">
+                        {p.score}
+                      </td>
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
             
@@ -180,6 +205,7 @@ export default function Home() {
                 View Full Leaderboard →
               </Link>
             </div>
+
           </div>
         </div>
       </section>
