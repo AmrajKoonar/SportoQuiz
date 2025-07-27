@@ -60,19 +60,19 @@ export default function About() {
   const faqItems = [
     {
       question: 'How are the quiz questions created?',
-      answer: 'Our team of sports experts carefully crafts each question, ensuring accuracy and varying levels of difficulty. We update our question database regularly to include recent sports events and statistics.'
+      answer: 'Every time you start a quiz, we fire up OpenAI’s GPT‑4o mini API on the backend. It dynamically generates 10 multiple‑choice questions tailored to your chosen sport and difficulty, no hand‑crawled question banks, it’s all AI‑powered in real time.'
     },
     {
       question: 'Is the app free to use?',
-      answer: 'Yes! The basic version of our sports trivia app is completely free. We offer premium features for dedicated users who want an enhanced experience with additional question sets and no advertisements.'
+      answer: 'Absolutely. SportoQuiz is 100 % free, no paywalls, no premium tiers, no ads. You get unrestricted access to all leagues, difficulty levels, custom sports and leaderboards at no cost.'
     },
     {
-      question: 'How often are new questions added?',
-      answer: 'We add new questions weekly, with major updates after significant sporting events like championships, drafts, or transfer windows.'
+      question: 'Which sports can I quiz on?',
+      answer: 'Out of the box we cover the major five; NFL, NBA, MLB, NHL and EPL, but if you want something else, just pick “Other” and type in your favorite sport. Our GPT‑4o mini model will handle the rest and spin up a custom quiz on the fly.'
     },
     {
-      question: 'Can I suggest new features or leagues?',
-      answer: 'Absolutely! We welcome user feedback and suggestions. Please use our contact form to share your ideas for new leagues, features, or question categories.'
+      question: 'Where does my data and my quiz history get stored?',
+      answer: 'All of your scores and leaderboard entries are saved in our backend database (hosted on Supabase). We only store your username, chosen league, difficulty, score and timestamp, no personal info beyond that.'
     },
     {
       question: 'How is the leaderboard calculated?',
@@ -121,13 +121,13 @@ export default function About() {
             <div className="mb-12">
               <h2 className="text-3xl font-bold text-white mb-6">Our Story</h2>
               <p className="text-gray-300 text-lg mb-6">
-                Sports Trivia Challenge was born out of our passion for sports and competitive trivia. We wanted to create a platform where fans could test their knowledge, learn interesting facts, and compete with other enthusiasts around the world.
+                SportoQuiz was born out of my passion for sports and competitive trivia. I wanted to create a platform where fans could test their knowledge, learn interesting facts, and compete with other enthusiasts around the world.
               </p>
               <p className="text-gray-300 text-lg mb-6">
-                Launched in 2023, our platform has grown to include thousands of questions across multiple professional leagues. Whether you're a casual fan or a sports statistics expert, we've designed our quizzes to be both challenging and enjoyable.
+                Launched in 2025, our platform has grown to include thousands of questions across multiple professional leagues. Whether you're a casual fan or a sports statistics expert, we've designed our quizzes to be both challenging and enjoyable.
               </p>
               <p className="text-gray-300 text-lg">
-                Our mission is to celebrate sports knowledge and create a community where fans can engage with their favorite leagues in a fun, interactive way.
+                My mission is to celebrate sports knowledge and create a community where fans can engage with their favorite leagues in a fun, interactive way.
               </p>
             </div>
             
