@@ -100,7 +100,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Sports Trivia Challenge. All rights reserved.
           </p>
           <p className="text-gray-500 text-xs text-center mt-2">
-            Powered by <a href="https://nfl.balldontlie.io/#nfl-api" className="hover:text-gray-400 transition duration-150">Ball Don't Lie API</a>
+            Powered by <a href="https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground" className="hover:text-gray-400 transition duration-150">OpenAI GPT-4o mini</a>
           </p>
         </div>
       </div>
