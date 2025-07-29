@@ -7,19 +7,19 @@ An interactive sports trivia web app that generates AI-powered questions to let 
 
 ## 🎯 Features
 
-- 🧠 **AI-Generated Trivia**: Questions created by OpenAI using real player stats from the balldontlie API.
-- 🏆 **Real-Time Leaderboard**: Compete with others and track your ranking live.
-- 🏈 **Multi-League Support**: Choose from 4 leagues — **NFL**, **NBA**, **MLB**, and **EPL**.
+- 🧠 **AI-Generated Trivia**: Questions created by OpenAI API modified by difficulty, user profile, and league.
+- 🏆 **Real-Time Leaderboard**: Compete with others and track your ranking live based on scores.
+- 🏈 **Multi-League Support**: Choose from all 668 leagues, and top leagues -> **NFL**, **NBA**, **NHL** **MLB**, and **EPL**.
 - 🎯 **3 Difficulty Modes**: Select from Rookie, Pro, and Hall of Fame.
 - 📇 **Contact Page**: Submit feedback or suggestions using the built-in contact form.
-- ⚡ **Fast & Responsive UI**: Built with Tailwind CSS for smooth performance and styling.
+- ⚡ **Fast & Responsive UI**: Built with Tailwind CSS and GSAP for smooth performance and styling.
 - 🔁 **CI/CD Integration**: Auto-deploys using GitHub and Vercel for seamless updates.
 
 ---
 
 ## 🛠️ Setup & Installation
 
-This is a Next.js 14 project using Tailwind CSS, TypeScript, and 2 external APIs.
+This is a Next.js 14 project using Tailwind CSS, TypeScript, and 1 external APIs. Databased managed by Supabase.
 
 ### 1. **Clone the Repository**
 ```bash
@@ -65,8 +65,9 @@ http://localhost:3000
 ## 🧠 Tech Stack
 
 - **Frontend**: Next.js 14, React 19, TypeScript, TailwindCSS
-- **APIs**: OpenAI API, [balldontlie API](https://www.balldontlie.io/)
+- **APIs**: [OpenAI API](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground)
 - **Deployment**: Vercel (CI/CD auto-deploy from GitHub)
+- **Database**: Supabase using SQL
 
 ---
 
