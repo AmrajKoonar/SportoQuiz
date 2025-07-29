@@ -13,8 +13,13 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: 'Sports Trivia Challenge',
+  title: 'SportoQuiz',
   description: 'Test your sports knowledge with quizzes on NFL, NBA, MLB, and EPL',
+  icons: {
+    icon: '/images/icon/favicon-32x32.png',         // this will become your favicon
+    shortcut: '/images/icon/favicon-32x32.png',     // optional, for “Add to Homescreen”
+    apple: '/images/icon/favicon-32x32.png' // optional, for Apple touch icon
+  }
 };
 
 export default function RootLayout({
