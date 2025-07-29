@@ -2,6 +2,7 @@
 
 An interactive sports trivia web app that generates AI-powered questions based on real-world player data and lets users compete through a live leaderboard. Built with Next.js, TypeScript, Tailwind CSS, and powered by OpenAI + balldontlie APIs.
 
+![SportoQuiz](sportoquiz_heropage.JPG)
 ---
 
 ## 🎯 Features
