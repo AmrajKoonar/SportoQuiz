@@ -103,6 +103,8 @@ export async function POST(request: NextRequest) {
     const priorQuestions = previousQuizzes
     .flatMap(qd => qd.questions.map(q => q.question));
 
+    console.log(JSON.stringify(priorQuestions));
+
     const response = await client.chat.completions.create({
       messages: [
         {
@@ -114,7 +116,7 @@ export async function POST(request: NextRequest) {
           role: "system",
           content:
           // embed the prior questions so the model can avoid them
-          `The user has already seen these questions:\n${JSON.stringify(priorQuestions)}\n\n` +
+          `You are NOT allowed to use any of these questions: \n${JSON.stringify(priorQuestions)}\n\n` +
           `When you generate new questions, do NOT repeat or closely paraphrase any of the above.`
         },
         {
@@ -141,12 +143,13 @@ export async function POST(request: NextRequest) {
           5. Provide clear, factual explanations
           6. Make sure each question has exactly 4 options
           7. Only one option should be correct per question
-          8. Return ONLY valid JSON with no extra text or markdown formatting`,
+          8. Return ONLY valid JSON with no extra text or markdown formatting
+          9. You are NOT allowed to use any of these questions: \n${JSON.stringify(priorQuestions)}\n\n`,
         },
       ],
       model: modelName,
-      temperature: 0.1,
-      max_tokens: 2000,
+      temperature: 0.3,
+      max_tokens: 5000,
       top_p: 1,
     });
 

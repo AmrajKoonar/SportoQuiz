@@ -170,6 +170,19 @@ export default function SportsQuizPage() {
 
       const data = await response.json();
       
+      
+
+      if (data.errorCode === 1) {
+        alert(`"${finalSport}" is not a recognized sport. Please enter a valid sport.`);
+        setCustomSport(""); // Clear the field
+        return false;
+      }
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch quiz data');
+      }
+
+
       if (typeof window !== 'undefined') {
         // 1. load or default
         const stored = localStorage.getItem('previousQuizzes');
@@ -183,16 +196,6 @@ export default function SportsQuizPage() {
       }
 
       setQuizData(data);
-
-      if (data.errorCode === 1) {
-        alert(`"${finalSport}" is not a recognized sport. Please enter a valid sport.`);
-        setCustomSport(""); // Clear the field
-        return false;
-      }
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch quiz data');
-      }
 
       setQuizData(data);
       setAnswerStartTime(Date.now());
