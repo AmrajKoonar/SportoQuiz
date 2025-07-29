@@ -1,8 +1,10 @@
+// src/app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
+import SmoothScrollWrapper from './components/SmoothScrollWrapper';
 
 const poppins = Poppins({
   weight: ['300', '400', '500', '600', '700'],
@@ -18,15 +20,20 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className={`${poppins.className} min-h-screen flex flex-col`}>
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+
+        {/* Wrap everything scroll‑able in your smooth scroll container */}
+        <SmoothScrollWrapper>
+          <main className="flex-grow">
+            {children}
+          </main>
+        </SmoothScrollWrapper>
+
         <Footer />
       </body>
     </html>
